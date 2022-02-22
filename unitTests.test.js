@@ -1,6 +1,7 @@
 const stringLength = require("./stringLength");
 const reverseString = require("./reverseString");
 const Calculator = require("./Calculator");
+const capitalizeString = require("./capitalizeString");
 describe("stringLength function", () => {
   test("returns string length", () => {
     const string = "hi";
@@ -43,6 +44,11 @@ describe("calculator's add method", () => {
     const num2 = "2";
     expect(Calculator.add(num1, num2)).toBe(2.5);
   });
+  test("throw error when a number is undefined or null", () => {
+    const num1 = 0.5;
+    const num2 = "";
+    expect(() => Calculator.add(num1, num2)).toThrow(Error);
+  });
 });
 describe("calculator's subtract method", () => {
   test("subtract two integer numbers", () => {
@@ -59,6 +65,11 @@ describe("calculator's subtract method", () => {
     const num1 = 0.5;
     const num2 = "2";
     expect(Calculator.subtract(num1, num2)).toBe(-1.5);
+  });
+  test("throw error when a number is undefined or null", () => {
+    const num1 = 0.5;
+    const num2 = undefined;
+    expect(() => Calculator.subtract(num1, num2)).toThrow(Error);
   });
 });
 describe("calculator's divide method", () => {
@@ -82,6 +93,11 @@ describe("calculator's divide method", () => {
     const num2 = 0;
     expect(() => Calculator.divide(num1, num2)).toThrow(Error);
   });
+  test("throw error when a number is undefined or null", () => {
+    const num1 = 0.5;
+    const num2 = undefined;
+    expect(() => Calculator.divide(num1, num2)).toThrow(Error);
+  });
 });
 describe("calculator's multiply method", () => {
   test("multiply two integer numbers", () => {
@@ -98,5 +114,24 @@ describe("calculator's multiply method", () => {
     const num1 = 0.5;
     const num2 = "2";
     expect(Calculator.multiply(num1, num2)).toBe(1.0);
+  });
+  test("throw error when a number is undefined or null", () => {
+    const num1 = 0.5;
+    const num2 = null;
+    expect(() => Calculator.multiply(num1, num2)).toThrow(Error);
+  });
+});
+describe("capitalize string ", () => {
+  test("capitalizes a one word string ", () => {
+    const string = "hi";
+    expect(capitalizeString(string)).toMatch("Hi");
+  });
+  test("capitalizes a multiple words string ", () => {
+    const string = "hi there my name is amira";
+    expect(capitalizeString(string)).toMatch("Hi There My Name Is Amira");
+  });
+  test("throws error when non-string is entered ", () => {
+    const string = 1;
+    expect(() => capitalizeString(string)).toThrow(Error);
   });
 });
